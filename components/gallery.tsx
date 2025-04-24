@@ -44,7 +44,7 @@ export default function Gallery() {
       title={t("gallery.title")}
       description={t("gallery.description")}
       items={galleryItems}
-      className="bg-gray-50"
+      className="bg-secondary"
     />
   )
 }

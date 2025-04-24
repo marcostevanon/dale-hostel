@@ -4,7 +4,6 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { Clock } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
-import { fadeIn, cardHover, hoverScale } from "@/utils/animations"
 
 export default function ActivityBooking() {
   const { t } = useLanguage()
@@ -15,9 +14,15 @@ export default function ActivityBooking() {
   }
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-secondary">
       <div className="section-container">
-        <motion.div {...fadeIn} className="text-center mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
           <h2 className="section-title">{t("booking.title")}</h2>
           <p className="section-description">{t("booking.description")}</p>
         </motion.div>
@@ -30,8 +35,8 @@ export default function ActivityBooking() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              {...cardHover}
-              className="relative overflow-hidden rounded-2xl h-80"
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              className="relative overflow-hidden rounded-xl h-80"
             >
               <div
                 className="absolute inset-0 bg-cover bg-center"
@@ -48,7 +53,7 @@ export default function ActivityBooking() {
                   <span>{activity.duration}</span>
                 </div>
 
-                <motion.div {...hoverScale}>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link
                     href={`https://wa.me/1234567890?text=${encodeURIComponent(`I want to book the ${activity.title}`)}`}
                     target="_blank"

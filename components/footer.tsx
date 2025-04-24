@@ -4,7 +4,6 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { Instagram, Phone, Mail, MapPin } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
-import { fadeIn, hoverScale } from "@/utils/animations"
 
 export default function Footer() {
   const { t } = useLanguage()
@@ -13,22 +12,27 @@ export default function Footer() {
     <footer className="bg-gray-900 text-white py-16">
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <motion.div {...fadeIn}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="text-3xl font-bold mb-6">Dale Hostel</h2>
             <p className="text-gray-300 max-w-md mb-8">{t("footer.description")}</p>
             <div className="space-y-4">
               <div className="flex items-center">
-                <MapPin className="h-5 w-5 mr-3 text-rose-400" />
+                <MapPin className="h-5 w-5 mr-3 text-primary-light" />
                 <span className="text-gray-300">{t("footer.address")}</span>
               </div>
               <div className="flex items-center">
-                <Phone className="h-5 w-5 mr-3 text-rose-400" />
+                <Phone className="h-5 w-5 mr-3 text-primary-light" />
                 <Link href="tel:+5492615555555" className="text-gray-300 hover:text-white transition-colors">
                   +54 9 261 555-5555
                 </Link>
               </div>
               <div className="flex items-center">
-                <Mail className="h-5 w-5 mr-3 text-rose-400" />
+                <Mail className="h-5 w-5 mr-3 text-primary-light" />
                 <Link href="mailto:info@dalehostel.com" className="text-gray-300 hover:text-white transition-colors">
                   info@dalehostel.com
                 </Link>
@@ -36,26 +40,32 @@ export default function Footer() {
             </div>
           </motion.div>
 
-          <motion.div {...fadeIn} transition={{ delay: 0.2 }} className="flex flex-col md:items-end">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex flex-col md:items-end"
+          >
             <h3 className="text-2xl font-bold mb-6">{t("common.followUs")}</h3>
             <div className="flex space-x-4 mb-8">
-              <motion.div {...hoverScale}>
+              <motion.div whileHover={{ scale: 1.1, rotate: 5 }} whileTap={{ scale: 0.9 }}>
                 <Link
                   href="https://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-rose-600 hover:bg-rose-700 h-12 w-12 rounded-full flex items-center justify-center transition-colors"
+                  className="bg-primary hover:bg-primary-dark h-12 w-12 rounded-full flex items-center justify-center transition-colors"
                 >
                   <Instagram className="h-6 w-6" />
                 </Link>
               </motion.div>
 
-              <motion.div {...hoverScale}>
+              <motion.div whileHover={{ scale: 1.1, rotate: 5 }} whileTap={{ scale: 0.9 }}>
                 <Link
                   href="https://wa.me/1234567890"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-green-600 hover:bg-green-700 h-12 w-12 rounded-full flex items-center justify-center transition-colors"
+                  className="bg-accent hover:bg-accent-dark h-12 w-12 rounded-full flex items-center justify-center transition-colors"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

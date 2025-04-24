@@ -4,7 +4,6 @@ import { useState } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { X } from "lucide-react"
-import { fadeIn, cardHover } from "@/utils/animations"
 
 interface GalleryItem {
   src: string
@@ -54,7 +53,13 @@ export default function ImageGallery({ title, description, items, className = ""
   return (
     <section id={id} className={`py-20 ${className}`}>
       <div className="section-container">
-        <motion.div {...fadeIn} className="text-center mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
           <h2 className="section-title">{title}</h2>
           <p className="section-description">{description}</p>
         </motion.div>
@@ -67,7 +72,7 @@ export default function ImageGallery({ title, description, items, className = ""
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              {...cardHover}
+              whileHover={{ y: -5 }}
               className="cursor-pointer overflow-hidden rounded-xl shadow-md"
               onClick={() => openLightbox(index)}
             >

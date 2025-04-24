@@ -4,7 +4,6 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/contexts/language-context"
-import { hoverScale } from "@/utils/animations"
 
 export default function Hero() {
   const { t } = useLanguage()
@@ -32,14 +31,19 @@ export default function Hero() {
           <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">{t("hero.description")}</p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <motion.div {...hoverScale}>
-              <Button size="lg" className="btn-primary">
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button size="lg" className="bg-primary hover:bg-primary-dark text-white rounded-full px-8 text-lg">
                 {t("common.bookNow")}
               </Button>
             </motion.div>
 
-            <motion.div {...hoverScale}>
-              <Button variant="outline" size="lg" className="btn-outline" asChild>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                variant="outline"
+                size="lg"
+                className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 rounded-full px-8 text-lg"
+                asChild
+              >
                 <Link href="#activities">{t("common.exploreActivities")}</Link>
               </Button>
             </motion.div>
