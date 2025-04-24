@@ -1,8 +1,8 @@
 import { put, list } from "@vercel/blob"
-import { DEFAULT_IMAGE_MAPPING } from "../config/default-image-mapping"
+import * as fs from "fs"
 
 // The key for our image mapping in Vercel Blob
-const IMAGE_MAPPING_KEY = "data/image-mapping.json"
+const DEFAULT_MAPPING = "data/image-mapping.json"
 
 /**
  * This script ensures that the image mapping exists in Vercel Blob
@@ -13,16 +13,16 @@ export async function ensureImageMapping() {
     console.log("Checking if image mapping exists in Vercel Blob...")
 
     // Try to get the existing mapping
-    const { blobs } = await list({ prefix: IMAGE_MAPPING_KEY })
-    const blob = blobs.find(b => b.pathname === IMAGE_MAPPING_KEY)
+    const { blobs } = await list({ prefix: DEFAULT_MAPPING })
+    const blob = blobs.find(b => b.pathname === DEFAULT_MAPPING)
 
     if (!blob) {
       console.log("Image mapping not found. Creating default mapping...")
 
       // Create the default mapping
-      const mappingString = JSON.stringify(DEFAULT_IMAGE_MAPPING, null, 2)
+      const mappingString = fs.readFileSync("data/image-mapping.json", "utf8")
 
-      await put(IMAGE_MAPPING_KEY, mappingString, {
+      await put(DEFAULT_MAPPING, mappingString, {
         access: "public",
         contentType: "application/json",
       })
