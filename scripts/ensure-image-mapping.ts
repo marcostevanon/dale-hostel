@@ -1,4 +1,4 @@
-import { put, get } from "@vercel/blob"
+import { put, list } from "@vercel/blob"
 
 // The key for our image mapping in Vercel Blob
 const IMAGE_MAPPING_KEY = "data/image-mapping.json"
@@ -28,7 +28,8 @@ async function ensureImageMapping() {
     console.log("Checking if image mapping exists in Vercel Blob...")
 
     // Try to get the existing mapping
-    const blob = await get(IMAGE_MAPPING_KEY)
+    const { blobs } = await list({ prefix: IMAGE_MAPPING_KEY })
+    const blob = blobs.find(b => b.pathname === IMAGE_MAPPING_KEY)
 
     if (!blob) {
       console.log("Image mapping not found. Creating default mapping...")
