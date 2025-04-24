@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { DEFAULT_IMAGE_MAPPING } from "@/services/image-service"
+import { DEFAULT_IMAGE_MAPPING } from "@/config/default-image-mapping"
 
 export async function GET() {
   try {

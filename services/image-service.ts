@@ -1,38 +1,7 @@
-import { cache } from "react"
+import { DEFAULT_IMAGE_MAPPING, DEFAULT_IMAGES, type ImageData, type ImageMap } from "@/config/default-image-mapping"
 import { IMAGE_TAGS } from "@/constants/image-tags"
 import { logError } from "@/utils/error-logger"
-
-export interface ImageData {
-  url: string
-  alt: string
-  section: string
-  description: string
-}
-
-type ImageMap = Record<string, ImageData>
-
-// Default image configuration
-export const DEFAULT_IMAGES = {
-  LOGO: "/dale-logo.png",
-  HERO_BG: "/modern-hostel-facade.png",
-  PLACEHOLDER: "/chromatic-explosion.png",
-}
-
-// Default image mapping to use as fallback
-export const DEFAULT_IMAGE_MAPPING: ImageMap = {
-  logo: {
-    url: DEFAULT_IMAGES.LOGO,
-    alt: "Dale Hostel Logo",
-    section: "navbar",
-    description: "Logo for Dale Hostel",
-  },
-  "hero-background": {
-    url: DEFAULT_IMAGES.HERO_BG,
-    alt: "Dale Hostel exterior view",
-    section: "hero",
-    description: "Main background image for the hero section",
-  },
-}
+import { cache } from "react"
 
 // Cache the fetch to avoid multiple requests for the same data
 export const getImageMap = cache(async (): Promise<ImageMap> => {

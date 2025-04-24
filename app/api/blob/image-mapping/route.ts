@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import { put, get } from "@vercel/blob"
-import { DEFAULT_IMAGE_MAPPING } from "@/services/image-service"
+import { put, list } from "@vercel/blob"
+import { DEFAULT_IMAGE_MAPPING } from "@/config/default-image-mapping"
 
 // The key for our image mapping in Vercel Blob
 const IMAGE_MAPPING_KEY = "data/image-mapping.json"
@@ -11,11 +11,13 @@ const IMAGE_MAPPING_KEY = "data/image-mapping.json"
 export async function GET() {
   try {
     // Try to get the image mapping from Vercel Blob
-    const blob = await get(IMAGE_MAPPING_KEY)
+    const { blobs } = await list({ prefix: IMAGE_MAPPING_KEY })
+    const blobInfo = blobs.find(b => b.pathname === IMAGE_MAPPING_KEY)
 
-    if (blob) {
-      // If the blob exists, return its content
-      const text = await blob.text()
+    if (blobInfo) {
+      // If the blob exists, get its content
+      const response = await fetch(blobInfo.url)
+      const text = await response.text()
       try {
         const mapping = JSON.parse(text)
         return NextResponse.json(mapping)

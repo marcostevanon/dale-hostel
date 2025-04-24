@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "prebuild": "ts-node --transpile-only scripts/ensure-defaults.ts",
+    "build": "next build",
+    "ensure-images": "ts-node --transpile-only scripts/ensure-image-mapping.ts",
+    "ensure-translations": "ts-node --transpile-only scripts/ensure-translations.ts",
+    "ensure-defaults": "ts-node --transpile-only scripts/ensure-defaults.ts"
+  },
+  "dependencies": {
+    "@sentry/nextjs": "^7.64.0",
+    "@vercel/blob": "^0.16.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
+  }
+}

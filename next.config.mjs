@@ -1,4 +1,5 @@
 const nextConfig = {
+  // Your existing Next.js config
   eslint: {
     ignoreDuringBuilds: true,
   },
