@@ -4,31 +4,15 @@
 
 @layer base {
   :root {
-    /* Base colors from our color system */
+    /* Base UI variables */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
-    /* Primary colors */
-    --primary: 346.8 77.2% 49.8%;
-    --primary-foreground: 355.7 100% 97.3%;
-
-    /* Secondary colors */
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    /* Accent colors */
-    --accent: 142.1 76.2% 36.3%;
-    --accent-foreground: 355.7 100% 97.3%;
-
-    /* Other UI colors */
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 346.8 77.2% 49.8%;
@@ -56,11 +40,11 @@ body {
   }
 
   .section-description {
-    @apply text-lg text-muted max-w-2xl mx-auto;
+    @apply text-lg text-gray-600 max-w-2xl mx-auto;
   }
 
   .btn-primary {
-    @apply bg-primary hover:bg-primary-dark text-white rounded-full px-8 py-3 text-lg font-medium transition-colors;
+    @apply bg-rose-600 hover:bg-rose-700 text-white rounded-full px-8 py-3 text-lg font-medium transition-colors;
   }
 
   .btn-outline {

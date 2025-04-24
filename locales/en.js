@@ -5,7 +5,10 @@ const translations = {
     followUs: "Follow Us",
     contactUs: "Contact Us",
     allRightsReserved: "All rights reserved",
-    reserveNow: "Reserve Now",
+  },
+  navigation: {
+    activities: "Activities",
+    contact: "Contact",
   },
   hero: {
     title: "Experience Mendoza Like Never Before",
@@ -81,8 +84,8 @@ const translations = {
   },
   languageSwitcher: {
     language: "Language",
-    english: "English",
-    spanish: "Spanish",
+    english: "English (US)",
+    spanish: "Español (AR)",
   },
 }
 

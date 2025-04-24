@@ -2,42 +2,22 @@
 
 import { useLanguage } from "@/contexts/language-context"
 import ImageGallery from "./image-gallery"
+import { GALLERY_IMAGES } from "@/constants/image-tags"
 
 export default function Gallery() {
   const { t } = useLanguage()
 
-  const galleryItems = [
-    {
-      src: "/placeholder.svg?height=600&width=800",
-      alt: t("gallery.spaces.commonArea"),
-      title: t("gallery.spaces.commonArea"),
-    },
-    {
-      src: "/placeholder.svg?height=600&width=800",
-      alt: t("gallery.spaces.pool"),
-      title: t("gallery.spaces.pool"),
-    },
-    {
-      src: "/placeholder.svg?height=600&width=800",
-      alt: t("gallery.spaces.dormitory"),
-      title: t("gallery.spaces.dormitory"),
-    },
-    {
-      src: "/placeholder.svg?height=600&width=800",
-      alt: t("gallery.spaces.terrace"),
-      title: t("gallery.spaces.terrace"),
-    },
-    {
-      src: "/placeholder.svg?height=600&width=800",
-      alt: t("gallery.spaces.kitchen"),
-      title: t("gallery.spaces.kitchen"),
-    },
-    {
-      src: "/placeholder.svg?height=600&width=800",
-      alt: t("gallery.spaces.privateRoom"),
-      title: t("gallery.spaces.privateRoom"),
-    },
-  ]
+  // Map the gallery image tags to gallery items with translations
+  const galleryItems = GALLERY_IMAGES.map((tag) => {
+    // Extract the space name from the tag (e.g., "gallery-common-area" -> "commonArea")
+    const spaceName = tag.replace("gallery-", "").replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())
+
+    return {
+      tag,
+      alt: t(`gallery.spaces.${spaceName}`),
+      title: t(`gallery.spaces.${spaceName}`),
+    }
+  })
 
   return (
     <ImageGallery

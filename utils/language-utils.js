@@ -1,9 +1,3 @@
-/**
- * Helper function to create a new language file
- * @param languageCode The ISO code for the language (e.g., 'fr', 'de')
- * @param languageName The display name of the language
- * @returns Instructions for adding a new language
- */
 export function createNewLanguage(languageCode, languageName) {
   return `
 To add ${languageName} (${languageCode}) support:

@@ -5,7 +5,10 @@ const translations = {
     followUs: "Síguenos",
     contactUs: "Contáctanos",
     allRightsReserved: "Todos los derechos reservados",
-    reserveNow: "Reservar Ahora",
+  },
+  navigation: {
+    activities: "Actividades",
+    contact: "Contacto",
   },
   hero: {
     title: "Vive Mendoza Como Nunca Antes",
@@ -85,8 +88,8 @@ const translations = {
   },
   languageSwitcher: {
     language: "Idioma",
-    english: "Inglés",
-    spanish: "Español",
+    english: "English (US)",
+    spanish: "Español (AR)",
   },
 }
 

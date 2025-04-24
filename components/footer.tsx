@@ -5,11 +5,11 @@ import Link from "next/link"
 import { Instagram, Phone, Mail, MapPin } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 
-export default function Footer() {
+export default function Footer({ id } : { id: string }) {
   const { t } = useLanguage()
 
   return (
-    <footer className="bg-gray-900 text-white py-16">
+    <footer className="bg-gray-900 text-white py-16" id={id}>
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <motion.div

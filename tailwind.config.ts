@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss"
-import colors from "./config/colors"
 
 const config = {
   content: [
@@ -19,14 +18,22 @@ const config = {
     },
     extend: {
       colors: {
-        // Map our color system to Tailwind's color system
-        primary: colors.primary,
-        secondary: colors.secondary,
-        accent: colors.accent,
-        background: colors.background,
-        foreground: colors.foreground,
-        muted: colors.muted,
-        border: colors.border,
+        // Fixed color palette
+        primary: {
+          light: "#fb7185", // rose-400
+          DEFAULT: "#e11d48", // rose-600
+          dark: "#be123c", // rose-700
+        },
+        secondary: {
+          light: "#f1f5f9", // slate-100
+          DEFAULT: "#e2e8f0", // slate-200
+          dark: "#cbd5e1", // slate-300
+        },
+        accent: {
+          light: "#4ade80", // green-400
+          DEFAULT: "#22c55e", // green-500
+          dark: "#15803d", // green-700
+        },
 
         // Keep compatibility with shadcn/ui components
         border: "hsl(var(--border))",

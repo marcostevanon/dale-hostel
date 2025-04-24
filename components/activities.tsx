@@ -8,32 +8,32 @@ export default function Activities() {
 
   const activityItems = [
     {
-      src: "/placeholder.svg?height=600&width=800",
+      tag: "activity-wine-tasting",
       alt: t("activities.items.wineTasting"),
       title: t("activities.items.wineTasting"),
     },
     {
-      src: "/placeholder.svg?height=600&width=800",
+      tag: "activity-hiking",
       alt: t("activities.items.hiking"),
       title: t("activities.items.hiking"),
     },
     {
-      src: "/placeholder.svg?height=600&width=800",
+      tag: "activity-city-tour",
       alt: t("activities.items.cityTour"),
       title: t("activities.items.cityTour"),
     },
     {
-      src: "/placeholder.svg?height=600&width=800",
+      tag: "activity-cooking-class",
       alt: t("activities.items.cookingClass"),
       title: t("activities.items.cookingClass"),
     },
     {
-      src: "/placeholder.svg?height=600&width=800",
+      tag: "activity-bike-tour",
       alt: t("activities.items.bikeTour"),
       title: t("activities.items.bikeTour"),
     },
     {
-      src: "/placeholder.svg?height=600&width=800",
+      tag: "activity-hostel-party",
       alt: t("activities.items.hostelParty"),
       title: t("activities.items.hostelParty"),
     },

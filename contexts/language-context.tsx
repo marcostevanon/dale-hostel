@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 import translations from "@/locales"
+import { logError } from "@/utils/error-logger"
 
 type Language = "en" | "es"
 
@@ -19,28 +20,46 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (typeof window === "undefined") return
 
-    const savedLanguage = localStorage.getItem("language") as Language
-    if (savedLanguage && (savedLanguage === "en" || savedLanguage === "es")) {
-      setLanguage(savedLanguage)
-    } else {
-      const browserLanguage = navigator.language.split("-")[0] as Language
-      if (browserLanguage === "es") {
-        setLanguage("es")
+    try {
+      const savedLanguage = localStorage.getItem("language") as Language
+      if (savedLanguage && (savedLanguage === "en" || savedLanguage === "es")) {
+        setLanguage(savedLanguage)
+      } else {
+        // If no saved language, try to detect from browser
+        const browserLanguage = navigator.language.split("-")[0] as Language
+        if (browserLanguage === "es") {
+          setLanguage("es")
+        }
+        // Save the detected language to localStorage
+        localStorage.setItem("language", browserLanguage === "es" ? "es" : "en")
       }
+    } catch (error) {
+      console.error("Error accessing localStorage:", error)
     }
   }, [])
 
   useEffect(() => {
     if (typeof window === "undefined") return
-    localStorage.setItem("language", language)
+
+    try {
+      localStorage.setItem("language", language)
+      // Also set the HTML lang attribute for better accessibility and SEO
+      document.documentElement.lang = language
+    } catch (error) {
+      console.error("Error saving language to localStorage:", error)
+    }
   }, [language])
 
-  // Simplified translation function using dot notation
+  // Update the translation function to include error tracking
   const t = (key: string): string => {
     try {
       return (key.split(".").reduce((o, i) => (o as any)?.[i], translations[language]) as string) || key
     } catch (error) {
-      console.error(`Translation error for key: ${key}`, error)
+      if (error instanceof Error) {
+        logError(error, { key, language })
+      } else {
+        console.error(`Translation error for key: ${key}`, error)
+      }
       return key
     }
   }

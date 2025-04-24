@@ -4,11 +4,13 @@ import { useState } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { X } from "lucide-react"
+import TaggedImage from "./tagged-image"
 
 interface GalleryItem {
-  src: string
+  tag: string
   alt: string
   title: string
+  src?: string // Optional for backward compatibility
 }
 
 interface ImageGalleryProps {
@@ -77,18 +79,24 @@ export default function ImageGallery({ title, description, items, className = ""
               onClick={() => openLightbox(index)}
             >
               <div className="relative h-64 w-full">
-                <Image
-                  src={item.src || "/placeholder.svg"}
-                  alt={item.alt}
-                  fill
-                  className="object-cover transition-transform duration-500 hover:scale-110"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
-                  <div className="p-4 w-full bg-gradient-to-t from-black/70 to-transparent">
-                    <h3 className="text-white font-medium text-lg">{item.title}</h3>
-                  </div>
-                </div>
+                {item.src ? (
+                  <Image
+                    src={item.src || "/placeholder.svg"}
+                    alt={item.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                ) : (
+                  <TaggedImage
+                    tag={item.tag}
+                    alt={item.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                )}
+                {/* Images are displayed without overlay text */}
               </div>
             </motion.div>
           ))}
@@ -125,13 +133,23 @@ export default function ImageGallery({ title, description, items, className = ""
               }}
             >
               <div className="relative w-full h-full">
-                <Image
-                  src={items[currentImageIndex].src || "/placeholder.svg"}
-                  alt={items[currentImageIndex].alt}
-                  fill
-                  className="object-contain"
-                  sizes="100vw"
-                />
+                {items[currentImageIndex].src ? (
+                  <Image
+                    src={items[currentImageIndex].src || "/placeholder.svg"}
+                    alt={items[currentImageIndex].alt}
+                    fill
+                    className="object-contain"
+                    sizes="100vw"
+                  />
+                ) : (
+                  <TaggedImage
+                    tag={items[currentImageIndex].tag}
+                    alt={items[currentImageIndex].alt}
+                    fill
+                    className="object-contain"
+                    sizes="100vw"
+                  />
+                )}
               </div>
 
               <div className="absolute bottom-4 left-0 right-0 text-center text-white">

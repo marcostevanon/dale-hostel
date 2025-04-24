@@ -4,6 +4,8 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/contexts/language-context"
+import TaggedImage from "./tagged-image"
+import { SITE_IMAGES } from "@/constants/image-tags"
 
 export default function Hero() {
   const { t } = useLanguage()
@@ -11,13 +13,17 @@ export default function Hero() {
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background image with overlay */}
-      <div
-        className="absolute inset-0 bg-cover bg-center z-0"
-        style={{
-          backgroundImage: "url('/placeholder.svg?height=1080&width=1920')",
-          filter: "brightness(0.7)",
-        }}
-      />
+      <div className="absolute inset-0 bg-cover bg-center z-0">
+        <TaggedImage
+          tag={SITE_IMAGES.HERO_BACKGROUND}
+          fill
+          sizes="100vw"
+          className="object-cover"
+          alt="Dale Hostel exterior view"
+          priority
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-30" style={{ filter: "brightness(0.7)" }}></div>
+      </div>
 
       <div className="container relative z-10 px-4 md:px-6 text-center">
         <motion.div
